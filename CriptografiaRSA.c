@@ -15,11 +15,11 @@ void chave_publica();
     long long int func_euclides(long long int, long long int);
 int criptografar();
 void descriptografar();
-    long long int valor_D(long long int a, long long int mod);
+    long long int valor_D(long long int a, long long int);
     long long int exponenciacao_modular(long long int, unsigned long long int, long long int);
     int primen(int*, int*, long long int);
     void registrador_primen(int*, int, int*);
-    int conferir_primalidade(long long int n);
+    int conferir_primalidade(long long int);
     int verificar_paridade_de_p(int);
     int p_menor_igual_a_dois(int*, int*, long long int);
 
@@ -238,7 +238,10 @@ int criptografar()
     for(int k = 0; k < string_lenght - 1; k++) {
         potencia_criptografar = pow(texto_criptografado[k], e);   // Loop -> Texto criptografado = (Texto puro^e) mod(n)
         texto_criptografado[k] = potencia_criptografar % n;       // e depois escreve o valor criptografado no documento.
-        fprintf(mensagem_criptografada, "%lld\n", texto_criptografado[k]);
+        fprintf(mensagem_criptografada, "%lld", texto_criptografado[k]);
+        if(k != string_lenght - 2) {
+            fprintf(mensagem_criptografada, " ");
+        }
     }
 
     // Fim da função
@@ -299,7 +302,7 @@ void descriptografar() {
 /*  Fazer a exponenciação modular de todos os caracteres criptografados e assigná-los a seus valores originais
     da tabela ASCII na string 'texto_puro'.*/
 
-    for(int i = 0; i < (string_lenght - 1); i++)
+    for(int i = 0; i < string_lenght; i++)
     {
         texto_puro[i] = exponenciacao_modular(texto_criptografado[i], d, n);
 
