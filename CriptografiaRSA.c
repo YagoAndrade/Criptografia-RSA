@@ -10,7 +10,7 @@ int sleep(int);                             // Conta segundos antes de avançar.
 int loop_funcao = TRUE;
 int qtd_primos_confirmados = 0;             // Variável para a função primen;
 
-void receber_entrada();
+int receber_entrada();
 void chave_publica();
     long long int func_euclides(long long int, long long int);
 int criptografar();
@@ -26,19 +26,22 @@ void descriptografar();
 int main()
 {
     printf("\nCriptografia RSA\n\n");
-    receber_entrada();
+    while(receber_entrada() != 4){ // loop para sair do programa so quando digitar 4 
+        loop_funcao = TRUE;
+    }
     return 0;
 }
 
-void receber_entrada() {
+int receber_entrada() {
     while(loop_funcao == TRUE)
     {
         loop_funcao = FALSE;
 
-        printf("Escolha uma das opcoes abaixo\n");
+        printf("\nEscolha uma das opcoes abaixo\n");
         printf("1. Gerar chave publica;\n");
         printf("2. Criptografar uma mensagem;\n");
         printf("3. Descriptografar uma mensagem.\n");
+        printf("4. SAIR\n");
         printf("Digite o numero da opcao: ");
         
         int escolha;
@@ -68,6 +71,10 @@ void receber_entrada() {
                 descriptografar();                              // Ir à função Descriptografar.
                 break;
 
+            case 4:
+                return 4;
+                break;
+
             default:
                 printf("\nOpção inválida!\n\n");    // Caso o usuário escolha uma opção inválida.
 
@@ -80,6 +87,7 @@ void receber_entrada() {
                 break;              // então o programa lista novamente as opções e pergunta novamente.
         }
     }
+    return 0;
 }
 
 void chave_publica()
